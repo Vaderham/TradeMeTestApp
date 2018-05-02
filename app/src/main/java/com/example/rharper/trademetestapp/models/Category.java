@@ -1,33 +1,37 @@
 package com.example.rharper.trademetestapp.models;
 
-import java.util.List;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 
     public class Category {
 
         @SerializedName("Name")
         @Expose
-        public String name;
+        private String name;
         @SerializedName("Number")
         @Expose
-        public String number;
+        private String number;
         @SerializedName("Path")
         @Expose
-        public String path;
+        private String path;
         @SerializedName("Subcategories")
         @Expose
-        public List<Subcategory> subcategories = null;
+        private List<Category> subcategories = null;
+        @SerializedName("HasClassifieds")
+        @Expose
+        private boolean hasClassifieds;
         @SerializedName("CanHaveSecondCategory")
         @Expose
-        public Boolean canHaveSecondCategory;
+        private boolean canHaveSecondCategory;
         @SerializedName("CanBeSecondCategory")
         @Expose
-        public Boolean canBeSecondCategory;
+        private boolean canBeSecondCategory;
         @SerializedName("IsLeaf")
         @Expose
-        public Boolean isLeaf;
+        private boolean isLeaf;
 
         public String getName() {
             return name;
@@ -41,32 +45,24 @@ import com.google.gson.annotations.SerializedName;
             return path;
         }
 
-        public List<Subcategory> getSubcategories() {
+        public List<Category> getSubcategories() {
             return subcategories;
         }
 
-        public Boolean getCanHaveSecondCategory() {
+        public boolean isHasClassifieds() {
+            return hasClassifieds;
+        }
+
+        public boolean isCanHaveSecondCategory() {
             return canHaveSecondCategory;
         }
 
-        public Boolean getCanBeSecondCategory() {
+        public boolean isCanBeSecondCategory() {
             return canBeSecondCategory;
         }
 
-        public Boolean getLeaf() {
+        public boolean isIsLeaf() {
             return isLeaf;
         }
 
-        @Override
-        public String toString() {
-            return "Category{" +
-                    "name='" + name + '\'' +
-                    ", number='" + number + '\'' +
-                    ", path='" + path + '\'' +
-                    ", subcategories=" + subcategories +
-                    ", canHaveSecondCategory=" + canHaveSecondCategory +
-                    ", canBeSecondCategory=" + canBeSecondCategory +
-                    ", isLeaf=" + isLeaf +
-                    '}';
-        }
     }

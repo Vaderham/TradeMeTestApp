@@ -1,37 +1,47 @@
 package com.example.rharper.trademetestapp;
 
-import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import com.example.rharper.trademetestapp.models.ApiEndpointInterface;
 import com.example.rharper.trademetestapp.models.Category;
-
+import java.util.ArrayList;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String BASE_URL = "http://api.tmsandbox.co.nz/";
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    ArrayList<String> catList = new ArrayList<>();
+
+    RetrofitBuilder retroBuilder = new RetrofitBuilder();
 
     ApiEndpointInterface apiService =
-            retrofit.create(ApiEndpointInterface.class);
+            retroBuilder.retrofit.create(ApiEndpointInterface.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mRecyclerView = findViewById(R.id.recycler);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new CategoryListAdapter(catList);
+        mRecyclerView.setAdapter(mAdapter);
 
         Button theGoButton = findViewById(R.id.DoTheThing);
 
@@ -41,23 +51,26 @@ public class MainActivity extends AppCompatActivity {
                 runTheThing();
             }
         });
-    }
+        }
 
     public void runTheThing(){
-        String catCode = "8739";
+        String catCode = "";
+
         Call<Category> call = apiService.getCategory(catCode);
         call.enqueue(new Callback<Category>() {
             @Override
-            public void onResponse(Call<Category> call, Response<Category> response) {
-                int statusCode = response.code();
-                Category category = response.body();
-                Log.v("Response: ", Integer.toString(statusCode));
-                Log.v("Body: ", category.toString());
+            public void onResponse(@NonNull Call<Category> call, @NonNull Response<Category> response) {
+                List<Category> categoryList = response.body().getSubcategories();
+                for (int i = 0; i < categoryList.size(); i++){
+                    catList.add(categoryList.get(i).getName());
+                    Log.v("The thing: ", catList.get(i));
+                }
+            //    mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<Category> call, Throwable t) {
-                Log.e("This fucked up: ", t.toString());
+
             }
         });
     }
