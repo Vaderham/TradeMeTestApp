@@ -8,7 +8,7 @@ import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 public class RetrofitBuilder {
 
-    private static final String BASE_URL = "http://api.tmsandbox.co.nz/";
+    private static final String BASE_URL = "https://api.tmsandbox.co.nz/";
     private static final String CONSUMER_KEY = "A1AC63F0332A131A78FAC304D007E7D1";
     private static final String CONSUMER_SECRET = "EC7F18B17A062962C6930A8AE88B16C7";
     private static final String CONSUMER_TOKEN = "13238ED1501A8A80DB8062A0CDFC14DB";
