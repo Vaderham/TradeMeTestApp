@@ -21,13 +21,12 @@ public class DbAsyncTask extends AsyncTask<List<Category>, Void, Void> {
         List<Category> newTree = lists[0];
         mDb.dbDao().deleteCategoryTree();
         mDb.dbDao().insertNewCategoryTree(newTree);
-        taskCompleted.categoryReadyCallback();
         return null;
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
-
         super.onPostExecute(aVoid);
+        taskCompleted.categoryReadyCallback();
     }
 }

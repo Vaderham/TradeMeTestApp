@@ -17,7 +17,7 @@ public class CategoryUpdater {
     private RetrofitBuilder retroBuilder = new RetrofitBuilder();
     private ApiEndpointInterface ApiInterface = retroBuilder.retrofit.create(ApiEndpointInterface.class);
     private AppDatabase mDb;
-    private Context mContext;
+    public Context mContext;
 
     public CategoryUpdater(AppDatabase db, Context context) {
         mDb = db;
@@ -30,7 +30,7 @@ public class CategoryUpdater {
             @Override
             public void onResponse(Call<Category> call, Response<Category> response) {
                 List<Category> tree = response.body().getSubcategories();
-                DbAsyncTask storeCatTree = new DbAsyncTask();
+                DbAsyncTask storeCatTree = new DbAsyncTask(mDb, mContext);
                 storeCatTree.execute(tree);
             }
 
@@ -41,21 +41,6 @@ public class CategoryUpdater {
         });
     }
 
-    public class DbAsyncTask extends AsyncTask<List<Category>, Void, Void>{
 
-        @Override
-        protected Void doInBackground(List<Category>... lists) {
-            List<Category> newTree = lists[0];
-            mDb.dbDao().deleteCategoryTree();
-            mDb.dbDao().insertNewCategoryTree(newTree);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-
-            super.onPostExecute(aVoid);
-        }
-    }
 
 }

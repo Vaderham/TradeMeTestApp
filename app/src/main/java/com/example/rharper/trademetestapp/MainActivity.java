@@ -13,7 +13,7 @@ import com.example.rharper.trademetestapp.models.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted {
+public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted{
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -51,11 +51,17 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
                 mUpdater.updateCategoryTreeFromApi();
             }
         });
+
         }
 
-    
+    @Override
+    public void categoryReadyCallback() {
+        getCategoryFromDb getCategoryFromDb = new getCategoryFromDb();
+        getCategoryFromDb.execute();
+    }
 
     class getCategoryFromDb extends AsyncTask<Void, Void, Void>{
+
         @Override
         protected Void doInBackground(Void... voids) {
             catList = mDb.dbDao().getAllCategories();
