@@ -7,22 +7,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder> {
 
-    private ArrayList mDataset;
+    private List mDataset;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mTextView;
 
         private ViewHolder(TextView v) {
             super(v);
-
             mTextView = itemView.findViewById(R.id.CatName);
         }
     }
 
-    public CategoryListAdapter(ArrayList myDataset) {
+    public CategoryListAdapter(List myDataset) {
         mDataset = myDataset;
     }
 

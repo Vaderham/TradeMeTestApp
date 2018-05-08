@@ -8,7 +8,7 @@ import com.example.rharper.trademetestapp.models.CatListConverter;
 import com.example.rharper.trademetestapp.models.Category;
 import com.example.rharper.trademetestapp.models.CategoryRequestHeader;
 
-@Database(entities = {Category.class, CategoryRequestHeader.class}, version = 1)
+@Database(entities = {Category.class}, version = 1)
 @TypeConverters({CatListConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract DbDao dbDao();
