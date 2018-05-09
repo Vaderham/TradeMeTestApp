@@ -1,15 +1,13 @@
 package com.example.rharper.trademetestapp;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 
 import com.example.rharper.trademetestapp.models.Category;
-import com.example.rharper.trademetestapp.models.CategoryRequestHeader;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.http.Query;
 
 @Dao
 public interface DbDao {

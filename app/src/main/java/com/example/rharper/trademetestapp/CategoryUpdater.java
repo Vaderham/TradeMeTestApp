@@ -1,7 +1,5 @@
 package com.example.rharper.trademetestapp;
 
-import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.rharper.trademetestapp.models.Category;
@@ -17,28 +15,28 @@ public class CategoryUpdater {
     private RetrofitBuilder retroBuilder = new RetrofitBuilder();
     private ApiEndpointInterface ApiInterface = retroBuilder.retrofit.create(ApiEndpointInterface.class);
     private AppDatabase mDb;
-    public Context mContext;
+    public OnDbTaskCompleted mContext;
 
-    public CategoryUpdater(AppDatabase db, Context context) {
+    public CategoryUpdater(AppDatabase db, OnDbTaskCompleted context) {
         mDb = db;
         mContext = context;
     }
 
     public void updateCategoryTreeFromApi(){
-        Call<Category> call = ApiInterface.getCategory("0");
-        call.enqueue(new Callback<Category>() {
-            @Override
-            public void onResponse(Call<Category> call, Response<Category> response) {
-                List<Category> tree = response.body().getSubcategories();
-                DbAsyncTask storeCatTree = new DbAsyncTask(mDb, mContext);
-                storeCatTree.execute(tree);
-            }
+            Call<Category> call = ApiInterface.getCategory("0");
+            call.enqueue(new Callback<Category>() {
+                @Override
+                public void onResponse(Call<Category> call, Response<Category> response) {
+                    List<Category> tree = response.body().getSubcategories();
+                    DbAsyncTask storeCatTree = new DbAsyncTask(mDb, mContext);
+                    storeCatTree.execute(tree);
+                }
 
-            @Override
-            public void onFailure(Call<Category> call, Throwable t) {
-                Log.v("Etag failed: ", t.toString());
-            }
-        });
+                @Override
+                public void onFailure(Call<Category> call, Throwable t) {
+                    Log.v("Etag failed: ", t.toString());
+                }
+            });
     }
 
 

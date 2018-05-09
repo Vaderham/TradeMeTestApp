@@ -2,14 +2,16 @@ package com.example.rharper.trademetestapp;
 
 import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.rharper.trademetestapp.models.Category;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,9 +51,9 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
             @Override
             public void onClick(View view) {
                 mUpdater.updateCategoryTreeFromApi();
+                Log.v("Original Cat List: ", catList.toString());
             }
         });
-
         }
 
     @Override
@@ -61,11 +63,17 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
     }
 
     class getCategoryFromDb extends AsyncTask<Void, Void, Void>{
-
         @Override
         protected Void doInBackground(Void... voids) {
-            catList = mDb.dbDao().getAllCategories();
-            mAdapter.notifyDataSetChanged();
+            List<Category> cat = mDb.dbDao().getAllCategories();
+            catList.clear();
+            catList.addAll(cat);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
             return null;
         }
     }
