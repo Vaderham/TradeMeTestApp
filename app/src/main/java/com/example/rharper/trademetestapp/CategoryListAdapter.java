@@ -14,21 +14,33 @@ import com.example.rharper.trademetestapp.models.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder> {
+public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapter.ViewHolder>{
 
     private List<Category> mDataset;
+    private static OnRecyclerClickListener recyclerClickListener;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTextView;
 
         private ViewHolder(View v) {
             super(v);
             mTextView = itemView.findViewById(R.id.CatName);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            recyclerClickListener.onRecyclerItemClick(getAdapterPosition(), view);
         }
     }
 
     public CategoryListAdapter(List myDataset) {
         mDataset = myDataset;
+    }
+
+    public void setRecyclerClickListener(OnRecyclerClickListener clickListener){
+        CategoryListAdapter.recyclerClickListener = clickListener;
     }
 
     @Override
@@ -41,7 +53,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTextView.setText(mDataset.get(position).getName());
-        Log.v("Updating view with: ", mDataset.get(position).getName());
     }
 
     @Override

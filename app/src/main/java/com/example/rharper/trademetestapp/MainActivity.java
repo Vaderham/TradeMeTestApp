@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.rharper.trademetestapp.models.Category;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted{
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private CategoryListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     List<Category> catList = new ArrayList<>();
@@ -43,6 +44,13 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new CategoryListAdapter(catList);
+        mAdapter.setRecyclerClickListener(new OnRecyclerClickListener() {
+            @Override
+            public void onRecyclerItemClick(int position, View view) {
+                Toast.makeText(MainActivity.this, "The thing at position " + position + " was clicked on. Nice!" , Toast.LENGTH_SHORT).show();
+            }
+        });
+
         mRecyclerView.setAdapter(mAdapter);
 
         Button theGoButton = findViewById(R.id.DoTheThing);
@@ -54,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
                 Log.v("Original Cat List: ", catList.toString());
             }
         });
+
+
+
         }
 
     @Override
