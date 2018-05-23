@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
     private CategoryListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    List<Category> catList = new ArrayList<>();
+    ArrayList<Category> catList = new ArrayList<>();
     CategoryUpdater mUpdater;
+    CategoryNavigator categoryNavigator;
     AppDatabase mDb;
 
     @Override
@@ -47,7 +48,11 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
         mAdapter.setRecyclerClickListener(new OnRecyclerClickListener() {
             @Override
             public void onRecyclerItemClick(int position, View view) {
-                Toast.makeText(MainActivity.this, "The thing at position " + position + " was clicked on. Nice!" , Toast.LENGTH_SHORT).show();
+                ArrayList<Category> newList = (ArrayList<Category>) categoryNavigator.moveUp(position);
+                catList.clear();
+                catList.addAll(newList);
+                mAdapter.notifyDataSetChanged();
+                mRecyclerView.scrollToPosition(0);
             }
         });
 
@@ -63,9 +68,24 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
             }
         });
 
-
+        getCategoryFromDb getCategoryFromDb = new getCategoryFromDb();
+        getCategoryFromDb.execute();
 
         }
+
+    @Override
+    public void onBackPressed() {
+        if(categoryNavigator.getHistorySize() > 0){
+            Toast.makeText(this, "Back button pressed. > 0.", Toast.LENGTH_SHORT).show();
+            ArrayList<Category> newList = (ArrayList<Category>) categoryNavigator.moveDown();
+            catList.clear();
+            catList.addAll(newList);
+            mAdapter.notifyDataSetChanged();
+            mRecyclerView.scrollToPosition(0);
+        }else{
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public void categoryReadyCallback() {
@@ -82,11 +102,11 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    categoryNavigator = new CategoryNavigator(catList);
                     mAdapter.notifyDataSetChanged();
                 }
             });
             return null;
         }
     }
-
 }
