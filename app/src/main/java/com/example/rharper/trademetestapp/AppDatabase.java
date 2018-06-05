@@ -6,7 +6,6 @@ import android.arch.persistence.room.TypeConverters;
 
 import com.example.rharper.trademetestapp.models.CatListConverter;
 import com.example.rharper.trademetestapp.models.Category;
-import com.example.rharper.trademetestapp.models.CategoryRequestHeader;
 
 @Database(entities = {Category.class}, version = 1)
 @TypeConverters({CatListConverter.class})
