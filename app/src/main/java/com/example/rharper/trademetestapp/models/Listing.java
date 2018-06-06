@@ -1,13 +1,31 @@
 package com.example.rharper.trademetestapp.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.net.URL;
+
 public class Listing {
 
+    @SerializedName("ListingId")
+    @Expose
     int listingId;
+
+    @SerializedName("Title")
+    @Expose
     String title;
+
+    @SerializedName("Category")
+    @Expose
     String Category;
+
+    @SerializedName("StartPrice")
+    @Expose
     String startPrice;
-    int PhotoId;
-    String ShortDescription;
+
+    @SerializedName("PictureHref")
+    @Expose
+    URL PictureHref;
 
     public int getListingId() {
         return listingId;
@@ -25,13 +43,10 @@ public class Listing {
         return startPrice;
     }
 
-    public int getPhotoId() {
-        return PhotoId;
+    public URL getPictureHref() {
+        return PictureHref;
     }
 
-    public String getShortDescription() {
-        return ShortDescription;
-    }
 
     @Override
     public String toString() {
@@ -40,8 +55,7 @@ public class Listing {
                 ", title='" + title + '\'' +
                 ", Category='" + Category + '\'' +
                 ", startPrice='" + startPrice + '\'' +
-                ", PhotoId=" + PhotoId +
-                ", ShortDescription='" + ShortDescription + '\'' +
+                ", PictureHref='" + PictureHref + '\'' +
                 '}';
     }
 }
