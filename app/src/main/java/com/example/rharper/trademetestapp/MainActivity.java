@@ -1,6 +1,7 @@
 package com.example.rharper.trademetestapp;
 
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
         mRecyclerView.setAdapter(mAdapter);
 
         Button theGoButton = findViewById(R.id.DoTheThing);
+        Button searchButton = findViewById(R.id.search);
 
         theGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,13 +70,22 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
             }
         });
 
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), SearchResultsActivity.class);
+                i.putExtra("CatId", categoryNavigator.getCurrentCategoryId());
+                startActivity(i);
+            }
+        });
+
         getCategoryFromDb getCategoryFromDb = new getCategoryFromDb();
         getCategoryFromDb.execute();
         }
 
     @Override
     public void onBackPressed() {
-        if(categoryNavigator.getHistorySize() > 0){
+        if(categoryNavigator.getHistorySize() > 1){
             Toast.makeText(this, "Back button pressed. > 0.", Toast.LENGTH_SHORT).show();
             ArrayList<Category> newList = (ArrayList<Category>) categoryNavigator.moveDown();
             catList.clear();

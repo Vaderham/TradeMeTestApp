@@ -57,7 +57,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mPrice.setText(mDataset.get(position).getStartPrice());
-        holder.mMainImage.setImageURI(mDataset.get(position).getPictureHref());
+
     }
 
     @Override
