@@ -7,12 +7,13 @@ import java.util.List;
 
 public class CategoryNavigator {
 
-    private ArrayList<List<Category>> history = new ArrayList<>();
+    private List<List<Category>> history = new ArrayList<>();
+
     private String currentCatId;
 
     public CategoryNavigator(ArrayList<Category> Tree) {
-        history.clear();
-        history.add(Tree);
+        ArrayList<Category> originalTree = new ArrayList(Tree);
+        history.add(originalTree);
     }
 
     public List<Category> moveUp(int position){
@@ -32,6 +33,7 @@ public class CategoryNavigator {
     public List<Category> moveDown() {
         if(history.size() == 2){
             history.remove(history.size() - 1);
+            currentCatId = "0";
             return history.get(0);
         }else{
             ArrayList<Category> newList = (ArrayList<Category>) history.get(history.size() - 2);

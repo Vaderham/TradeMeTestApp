@@ -109,10 +109,10 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
             List<Category> cat = mDb.dbDao().getAllCategories();
             catList.clear();
             catList.addAll(cat);
+            categoryNavigator = new CategoryNavigator(catList);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    categoryNavigator = new CategoryNavigator(catList);
                     mAdapter.notifyDataSetChanged();
                 }
             });
