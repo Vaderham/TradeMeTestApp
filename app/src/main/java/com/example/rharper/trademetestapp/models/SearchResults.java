@@ -7,39 +7,71 @@ import java.util.List;
 
 public class SearchResults {
 
+    @SerializedName("TotalCount")
+    @Expose
+    private Integer totalCount;
     @SerializedName("Page")
     @Expose
-    private int page;
-
+    private Integer page;
     @SerializedName("PageSize")
     @Expose
-    private int pageSize;
-
-    @SerializedName("Listings")
+    private Integer pageSize;
+    @SerializedName("List")
     @Expose
-    private List<Listing> listings;
+    private List<Listing> list = null;
+    @SerializedName("DidYouMean")
+    @Expose
+    private String didYouMean;
 
-    public int getPage() {
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public Integer getPage() {
         return page;
     }
 
-    public void setPage(int page) {
+    public void setPage(Integer page) {
         this.page = page;
     }
 
-    public int getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
-    public List<Listing> getListings() {
-        return listings;
+    public java.util.List<Listing> getList() {
+        return list;
     }
 
-    public void setListings(List<Listing> listings) {
-        this.listings = listings;
+    public void setList(java.util.List<Listing> list) {
+        this.list = list;
+    }
+
+    public String getDidYouMean() {
+        return didYouMean;
+    }
+
+    public void setDidYouMean(String didYouMean) {
+        this.didYouMean = didYouMean;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchResults{" +
+                "totalCount=" + totalCount +
+                ", page=" + page +
+                ", pageSize=" + pageSize +
+                ", list=" + list +
+                ", didYouMean='" + didYouMean + '\'' +
+                '}';
     }
 }

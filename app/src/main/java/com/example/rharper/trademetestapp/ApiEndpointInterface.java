@@ -17,7 +17,7 @@ public interface ApiEndpointInterface {
     Call<Category> getCategory(@Path("categoryId") String categoryId);
 
     @GET("v1/Search/General.json")
-    Call<SearchResults> getSearchResults(@Query("category") String category);
+    Call<SearchResults> getSearchResults(@Query("category_id") String category);
 
     @GET("v1/Listings/{listingId}.json")
     Call<Listing> getListing(@Path("listingId") String listingId);

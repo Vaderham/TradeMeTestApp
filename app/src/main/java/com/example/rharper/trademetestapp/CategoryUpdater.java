@@ -27,9 +27,10 @@ public class CategoryUpdater {
             call.enqueue(new Callback<Category>() {
                 @Override
                 public void onResponse(Call<Category> call, Response<Category> response) {
-                    List<Category> tree = response.body().getSubcategories();
-                    DbAsyncTask storeCatTree = new DbAsyncTask(mDb, mContext);
-                    storeCatTree.execute(tree);
+                        List<Category> tree = response.body().getSubcategories();
+                        DbAsyncTask storeCatTree = new DbAsyncTask(mDb, mContext);
+                        storeCatTree.execute(tree);
+
                 }
 
                 @Override

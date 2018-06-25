@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
     private RecyclerView.LayoutManager mLayoutManager;
 
     ArrayList<Category> catList = new ArrayList<>();
+
     CategoryUpdater mUpdater;
     CategoryNavigator categoryNavigator;
     AppDatabase mDb;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new CategoryListAdapter(catList);
+
         mAdapter.setRecyclerClickListener(new OnRecyclerClickListener() {
             @Override
             public void onRecyclerItemClick(int position, View view) {

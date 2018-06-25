@@ -19,7 +19,6 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     private List<Category> mDataset;
     private static OnRecyclerClickListener recyclerClickListener;
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTextView;
 
