@@ -60,7 +60,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTitle.setText(mDataset.get(position).getTitle());
         holder.mPrice.setText("$" + Double.toString(mDataset.get(position).getStartPrice()));
-       Glide.with(activityContext).load(mDataset.get(position).getPictureHref()).into(holder.mMainImage);
+        Glide.with(activityContext).load(mDataset.get(position).getPictureHref()).into(holder.mMainImage);
     }
 
     @Override
