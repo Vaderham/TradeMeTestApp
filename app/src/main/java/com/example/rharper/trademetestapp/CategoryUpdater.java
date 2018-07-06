@@ -30,7 +30,6 @@ public class CategoryUpdater {
                         List<Category> tree = response.body().getSubcategories();
                         DbAsyncTask storeCatTree = new DbAsyncTask(mDb, mContext);
                         storeCatTree.execute(tree);
-
                 }
 
                 @Override

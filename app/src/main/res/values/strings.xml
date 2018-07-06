@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TradeMeTestApp</string>
     <string name="title_activity_search_results">SearchResults</string>
+    <string name="title_activity_listing_view">ListingViewActivity</string>
 </resources>

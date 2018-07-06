@@ -20,7 +20,10 @@
         </activity>
         <activity
             android:name=".SearchResultsActivity"
-            android:label="@string/title_activity_search_results"></activity>
+            android:label="@string/title_activity_search_results" />
+        <activity
+            android:name=".ListingViewActivity"
+            android:label="@string/title_activity_listing_view"></activity>
     </application>
 
 </manifest>

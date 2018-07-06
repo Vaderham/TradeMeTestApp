@@ -28,9 +28,7 @@ public class SearchResultsActivity extends Activity {
     private RecyclerView.LayoutManager layoutManager;
     public ArrayList<Listing> searchResultsList = new ArrayList<>();
 
-
     public String iCatId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +50,6 @@ public class SearchResultsActivity extends Activity {
         getCategorySearch search = new getCategorySearch();
         search.execute();
     }
-
 
     private class getCategorySearch extends AsyncTask<Void, Void, Void>{
         @Override
