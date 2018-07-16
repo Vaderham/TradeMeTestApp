@@ -37,15 +37,11 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
         mDb = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "category.db")
                 .fallbackToDestructiveMigration()
                 .build();
-
         mUpdater = new CategoryUpdater(mDb, this);
-
         mRecyclerView = findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
-
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
         mAdapter = new CategoryListAdapter(catList);
 
         mAdapter.setRecyclerClickListener(new OnRecyclerClickListener() {
@@ -60,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements OnDbTaskCompleted
         });
 
         mRecyclerView.setAdapter(mAdapter);
-
         Button theGoButton = findViewById(R.id.DoTheThing);
         Button searchButton = findViewById(R.id.search);
 

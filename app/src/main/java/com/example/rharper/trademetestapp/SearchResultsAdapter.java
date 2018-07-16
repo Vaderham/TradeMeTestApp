@@ -20,8 +20,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     private static OnRecyclerClickListener recyclerClickListener;
     private Context activityContext;
 
-
-
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTitle;
         private ImageView mMainImage;
@@ -32,6 +30,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             mTitle = itemView.findViewById(R.id.title);
             mMainImage = itemView.findViewById(R.id.mainPhoto);
             mPrice = itemView.findViewById(R.id.price);
+            itemView.setOnClickListener(this);
         }
 
         @Override
@@ -45,9 +44,9 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         activityContext = context;
     }
 
-//    public void setRecyclerClickListener(OnRecyclerClickListener clickListener){
-//        SearchResultsAdapter.recyclerClickListener = clickListener;
-//    }
+    public void setRecyclerClickListener(OnRecyclerClickListener clickListener){
+        SearchResultsAdapter.recyclerClickListener = clickListener;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.rharper.trademetestapp.models.Listing;
@@ -49,6 +50,15 @@ public class SearchResultsActivity extends Activity {
 
         getCategorySearch search = new getCategorySearch();
         search.execute();
+
+        searchResultsAdapter.setRecyclerClickListener(new OnRecyclerClickListener() {
+            @Override
+            public void onRecyclerItemClick(int position, View view) {
+                Intent i = new Intent(getApplicationContext(), ListingViewActivity.class);
+                i.putExtra("listingId", searchResultsList.get(position).getListingId().toString());
+                startActivity(i);
+            }
+        });
     }
 
     private class getCategorySearch extends AsyncTask<Void, Void, Void>{
@@ -76,8 +86,6 @@ public class SearchResultsActivity extends Activity {
                     Log.e("Failed to retrieve:", call.toString());
                 }
             });
-
-
 
             return null;
         }
